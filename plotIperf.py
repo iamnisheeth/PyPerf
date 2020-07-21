@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt  
 import json
 my_list = []
-y = []
-x = []
+y = [0]
+x = [0]
 time_secs = 0
 bandwidth_unit = '*Bits/sec'
+length = 0
 with open('result.txt') as f:
     lines = f.readlines() # list containing lines of file
     i = 1
@@ -18,11 +19,12 @@ with open('result.txt') as f:
     		print('\nDATA:' + line)
 		tokens = line.split('Bytes')
 		length = len(str(line))
-		bandwidth_unit = str(line[length-9:length])
+# 		bandwidth_unit = str(line[length-9:length])
 		f = float(str(line[length-14:length-10]))
 		x.append(time_secs)
 		y.append(f) 
 		time_secs = time_secs + 1
+	bandwidth_unit = str(lines[7][length-9:length])
 plt.rcParams['axes.facecolor'] = 'black'
 plt.title("Iperf Results")
 plt.xlabel("time (sec)")
